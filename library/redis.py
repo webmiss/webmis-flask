@@ -194,9 +194,7 @@ class Redis(Base):
       return tuple(b'',b'')
   def BLPop(self, key: str, timeout: float):
     try:
-      res = self.__conn.blpop(key, timeout)
-      if not res : return tuple(b'',b'')
-      return res
+      return self.__conn.blpop(key, timeout)
     except Exception as e:
       self.Print('[Redis] BLPop:', e)
-      return tuple(b'',b'')
+      return None

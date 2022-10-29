@@ -38,19 +38,6 @@ elif [ "$s" == "socketStart" ]; then
 # Socket-停止
 elif [ "$s" == "socketStop" ]; then
   ps -aux | grep "$cli socket start" | grep -v grep | awk {'print $2'} | xargs kill
-# Logs-运行
-elif [ "$s" == "logs" ]; then
-  {
-    python $cli redis logs
-  } || {
-    echo "> 请安装'python'"
-  }
-# Logs-启动
-elif [ "$s" == "logsStart" ]; then
-  python $cli redis logs &
-# Logs-停止
-elif [ "$s" == "logsStop" ]; then
-  ps -aux | grep "$cli redis logs" | grep -v grep | awk {'print $2'} | xargs kill
 else
   echo "----------------------------------------------------"
   echo "[use] ./bash <command>"
@@ -65,10 +52,6 @@ else
   echo "  socket        运行"
   echo "  socketStart   启动"
   echo "  socketStop    停止"
-  echo "<Logs>"
-  echo "  logs          运行"
-  echo "  logsStart     启动"
-  echo "  logsStop      停止"
   echo "----------------------------------------------------"
 fi
 
