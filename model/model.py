@@ -95,6 +95,9 @@ class Model :
   # 表
   def Table(self, table: str) :
     self.__table = table
+  # 分区
+  def Partition(self, *partition: str) :
+    self.__table += ' PARTITION('+','.join(partition)+')'
   # 关联-INNER
   def Join(self, table: str, on : str) :
     self.__table += ' INNER JOIN ' + table + ' ON ' + on

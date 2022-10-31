@@ -12,7 +12,7 @@ class Logs:
     FileEo.WriterEnd(file, content+"\n")
 
   # 生产者
-  def Logs(data: dict):
+  def Log(data: dict):
     redis = Redis()
     redis.RPush('logs', Util.JsonEncode(data))
     redis.Close()
