@@ -6,9 +6,10 @@ from flask_cors import CORS
 from middleware.cors import Cors
 
 from config.env import Env
+from router.home import Home
 from router.api import Api
 from router.admin import Admin
-from router.home import Home
+
 
 # 配置
 app = Flask(__name__)

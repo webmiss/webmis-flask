@@ -6,12 +6,16 @@ from library.captcha import Captcha
 from library.upload import Upload
 from util.util import Util
 
+from service.data import Data
+
 from flask import send_file
 
 class Index(Base) :
-
+  
   # 首页
   def Index(self):
+    # Data.PartitionID('2022-10-01 00:00:00', 'sys_menus')
+    Data().PartitionName(1661961600, 1664553600)
     # 返回
     return self.GetJSON({'code':0,'msg':'Python Web'})
 
@@ -39,14 +43,4 @@ class Index(Base) :
       FileEo.Writer(file, ct)
     # 返回
     return send_file(Env.root_dir+file, mimetype='image/png')
-  
-  # OSS-上传回调
-  def OssCallback(self):
-    # 参数
-    param = self.Json()
-    # 验证
-    if not Upload.OssPolicyVerify(param) : return ''
-    # 数据处理
-    text = Util.JsonEncode(param)
-    Util.Exec('echo '+text+' > public/upload/callback.txt')
-    return self.GetJSON({'Status':'Ok'})
+
