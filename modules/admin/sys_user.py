@@ -115,7 +115,7 @@ class SysUser(Base):
       cs = conn.cursor()
       # 用户
       m1 = User()
-      m1.Values({'id':uid, 'tel':tel, 'password':Hash.Md5(passwd)})
+      m1.Values({'id':uid, 'tel':tel, 'password':Hash.Md5(passwd), 'rtime':Util.Time()})
       sql, args = m1.InsertSQL()
       cs.execute(sql, args)
       # 详情
@@ -165,8 +165,8 @@ class SysUser(Base):
     m.Columns('id')
     m.Where('tel=%s', tel)
     user = m.FindFirst()
-    if not user :
-      return self.GetJSON({'code':4000, 'msg':'该用户不存在!'})
+    if len(user)>0 and user['id']!=uid :
+      return self.GetJSON({'code':4000, 'msg':'该用户已存在!'})
     # 更新
     uData = {'tel': tel}
     if passwd != '' : uData['password'] = Hash.Md5(passwd)
