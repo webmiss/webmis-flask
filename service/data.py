@@ -60,6 +60,7 @@ class Data:
     one = m.FindFirst()
     one['date'] = date
     one['time'] = t
+    one['table'] = table
     return one
 
   # 分区-获取名称
